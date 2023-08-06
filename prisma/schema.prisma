@@ -82,15 +82,16 @@ model TicketType {
 }
 
 model Ticket {
-  id           Int          @id @default(autoincrement())
-  ticketTypeId Int
-  TicketType   TicketType   @relation(fields: [ticketTypeId], references: [id])
-  enrollmentId Int
-  Enrollment   Enrollment   @relation(fields: [enrollmentId], references: [id])
-  status       TicketStatus
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
-  Payment      Payment[]
+  id                   Int                    @id @default(autoincrement())
+  ticketTypeId         Int
+  TicketType           TicketType             @relation(fields: [ticketTypeId], references: [id])
+  enrollmentId         Int
+  Enrollment           Enrollment             @relation(fields: [enrollmentId], references: [id])
+  status               TicketStatus
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  Payment              Payment[]
+  ActivitySubscription ActivitySubscription[]
 }
 
 enum TicketStatus {
@@ -137,4 +138,32 @@ model Booking {
   roomId    Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Activities {
+  id                   Int                    @id @default(autoincrement())
+  name                 String
+  date                 DateTime
+  startsAt             DateTime
+  endsAt               DateTime
+  vacancy              Int
+  location             Int?
+  ActivitiesLocation   ActivitiesLocation?    @relation(fields: [location], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  ActivitySubscription ActivitySubscription[]
+
+  @@index([date])
+}
+
+model ActivitiesLocation {
+  id         Int          @id @default(autoincrement())
+  name       String       @unique
+  Activities Activities[]
+}
+
+model ActivitySubscription {
+  id         Int         @id @default(autoincrement())
+  activityId Int?
+  ticketId   Int?
+  Activities Activities? @relation(fields: [activityId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Ticket     Ticket?     @relation(fields: [ticketId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
