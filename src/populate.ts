@@ -75,4 +75,5 @@ loadEnv();
 const port = +process.env.PORT || 4000;
 init().then(() => {
   createdata();
+  console.log('DB successfully populated!')
 });

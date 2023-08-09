@@ -1,4 +1,4 @@
-import { prisma } from '@/config';
+import { prisma, redis } from '@/config';
 import { Activities, ActivitySubscription } from '@prisma/client';
 
 type CreateParams = Omit<ActivitySubscription, 'id'>;
@@ -15,7 +15,6 @@ async function create(
   { activityId, ticketId }: CreateParams,
   vacancy: number,
 ): Promise<[ActivitySubscription, Activities]> {
-  
   const subscription = await prisma.activitySubscription.create({
     data: {
       activityId,
@@ -31,6 +30,8 @@ async function create(
       vacancy: vacancy - 1,
     },
   });
+
+  redis.set(`activity:${activityId}`, JSON.stringify(activity));
 
   return [subscription, activity];
 }
@@ -88,7 +89,12 @@ async function findByActivityDateAndTicket(
   const endDate = new Date(date);
   endDate.setDate(endDate.getDate() + 1);
 
-  return prisma.$queryRaw`
+  const cachedData = await redis.get(`activityData:${startDate}:${endDate}:${ticketId}`);
+  if (cachedData) {
+    return JSON.parse(cachedData) as { startsAt: string; endsAt: string }[];
+  }
+
+  const data = await prisma.$queryRaw`
     SELECT
       "Activities"."startsAt" as "startsAt",
       "Activities"."endsAt" as "endsAt"
@@ -97,6 +103,10 @@ async function findByActivityDateAndTicket(
     WHERE "Activities".date >= ${startDate} AND "Activities".date < ${endDate}
       AND "ActivitySubscription"."ticketId" = ${ticketId};
   `;
+
+  redis.set(`activityData:${startDate}:${endDate}:${ticketId}`, JSON.stringify(data));
+
+  return data as { startsAt: string; endsAt: string }[];
 }
 
 async function deleteSubscription(SubscriptionId: number, vacancy: number, activityId: number) {
@@ -106,7 +116,7 @@ async function deleteSubscription(SubscriptionId: number, vacancy: number, activ
     },
   });
 
-  return prisma.activities.update({
+  const updatedActivity = await prisma.activities.update({
     where: {
       id: activityId,
     },
@@ -114,6 +124,10 @@ async function deleteSubscription(SubscriptionId: number, vacancy: number, activ
       vacancy: vacancy + 1,
     },
   });
+
+  redis.set(`activity:${activityId}`, JSON.stringify(updatedActivity));
+
+  return updatedActivity;
 }
 
 const activitiesRepository = {
@@ -127,5 +141,3 @@ const activitiesRepository = {
 };
 
 export default activitiesRepository;
-
-
