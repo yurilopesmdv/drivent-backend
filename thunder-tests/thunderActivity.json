@@ -1,0 +1,26 @@
+[
+    {
+        "_id": "b353d437-96e2-4560-a7a0-a1b377e240f3",
+        "colId": "history",
+        "containerId": "",
+        "name": "http://localhost:4000/tickets/types",
+        "url": "http://localhost:4000/tickets",
+        "method": "GET",
+        "sortNum": 0,
+        "created": "2023-08-02T16:50:19.516Z",
+        "modified": "2023-08-04T16:40:42.153Z",
+        "headers": [
+            {
+                "name": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5MDk5MDQ1OH0.7uCR7Q0r_y2KkpJT58ncTz0fY1tmK4qqQXeVsMhmChY"
+            }
+        ],
+        "params": [],
+        "body": {
+            "type": "json",
+            "raw": "{\n  \"userId\": 1\n}",
+            "form": []
+        },
+        "tests": []
+    }
+]

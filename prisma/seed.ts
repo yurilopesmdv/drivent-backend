@@ -4,6 +4,15 @@ import bcrypt from 'bcrypt';
 const prisma = new PrismaClient();
 
 async function main() {
+  await prisma.event.deleteMany({});
+  await prisma.hotel.deleteMany({});
+  await prisma.room.deleteMany({});
+  await prisma.address.deleteMany({});
+  await prisma.payment.deleteMany({});
+  await prisma.ticket.deleteMany({});
+  await prisma.ticketType.deleteMany({});
+  await prisma.enrollment.deleteMany({});
+  //await prisma.user.deleteMany({});
   let event = await prisma.event.findFirst();
   let hotel = await prisma.hotel.findFirst();
   let room = await prisma.room.findFirst();
