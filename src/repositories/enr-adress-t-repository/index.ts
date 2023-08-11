@@ -18,7 +18,7 @@ async function upsertEnrollmentAndAdress(
   try {
     await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
       const enrollment = await enrollmentRepository.upsert(userId, createdEnrollment, updatedEnrollment, tx);
-      await addressRepository.upsert(enrollment.id, createdAddress, updatedAddress);
+      await addressRepository.upsert(enrollment.id, createdAddress, updatedAddress, tx);
     });
   } catch (error) {
     throw new Error();
