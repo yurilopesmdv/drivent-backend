@@ -408,6 +408,9 @@ describe('GET /activities/days/:date', () => {
       const date = activity.date.toISOString().slice(0, 10);
       const newdate = activity.date.toISOString();
 
+      const formattedStartsAt = activity.startsAt.toISOString();
+      const formattedEndsAt = activity.endsAt.toISOString();
+
       const response = await server.get(`/activities/days/${date}`).set('Authorization', `Bearer ${token}`);
 
       expect(response.status).toBe(httpStatus.OK);
@@ -420,8 +423,8 @@ describe('GET /activities/days/:date', () => {
               id: activity.id,
               name: activity.name,
               date: newdate,
-              startsAt: activity.startsAt,
-              endsAt: activity.endsAt,
+              startsAt: formattedStartsAt,
+              endsAt: formattedEndsAt,
               vacancy: activity.vacancy,
               location: activity.location,
               ActivitySubscription: [],

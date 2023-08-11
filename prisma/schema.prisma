@@ -143,9 +143,9 @@ model Booking {
 model Activities {
   id                   Int                    @id @default(autoincrement())
   name                 String
-  date                 DateTime
-  startsAt             DateTime
-  endsAt               DateTime
+  date                 DateTime @db.Timestamptz 
+  startsAt             DateTime @db.Timestamptz
+  endsAt               DateTime @db.Timestamptz
   vacancy              Int
   location             Int?
   ActivitiesLocation   ActivitiesLocation?    @relation(fields: [location], references: [id], onDelete: NoAction, onUpdate: NoAction)

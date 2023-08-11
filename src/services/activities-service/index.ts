@@ -81,11 +81,13 @@ async function deleteActivityById(userId: number, activityId: number) {
 }
 
 const activitiesService = {
+  checkEnrollmentTicket,
   createSubscription,
   findSubscriptionByTicketAndActivityIds,
   getDays,
   getActivitiesByDay,
   deleteActivityById,
+  checkValidActivity
 };
 
 export default activitiesService;
