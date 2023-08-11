@@ -1,4 +1,4 @@
-import { prisma, redis } from '@/config';
+import { prisma } from '@/config';
 import { Activities, ActivitySubscription } from '@prisma/client';
 
 type CreateParams = Omit<ActivitySubscription, 'id'>;
@@ -30,8 +30,6 @@ async function create(
       vacancy: vacancy - 1,
     },
   });
-
-  redis.set(`activity:${activityId}`, JSON.stringify(activity));
 
   return [subscription, activity];
 }
@@ -89,11 +87,6 @@ async function findByActivityDateAndTicket(
   const endDate = new Date(date);
   endDate.setDate(endDate.getDate() + 1);
 
-  const cachedData = await redis.get(`activityData:${startDate}:${endDate}:${ticketId}`);
-  if (cachedData) {
-    return JSON.parse(cachedData) as { startsAt: string; endsAt: string }[];
-  }
-
   const data = await prisma.$queryRaw`
     SELECT
       "Activities"."startsAt" as "startsAt",
@@ -103,8 +96,6 @@ async function findByActivityDateAndTicket(
     WHERE "Activities".date >= ${startDate} AND "Activities".date < ${endDate}
       AND "ActivitySubscription"."ticketId" = ${ticketId};
   `;
-
-  redis.set(`activityData:${startDate}:${endDate}:${ticketId}`, JSON.stringify(data));
 
   return data as { startsAt: string; endsAt: string }[];
 }
@@ -124,8 +115,6 @@ async function deleteSubscription(SubscriptionId: number, vacancy: number, activ
       vacancy: vacancy + 1,
     },
   });
-
-  redis.set(`activity:${activityId}`, JSON.stringify(updatedActivity));
 
   return updatedActivity;
 }

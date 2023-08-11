@@ -3,8 +3,8 @@ CREATE TABLE "Activities" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "date" TIMESTAMP NOT NULL,
-    "startsAt" TIMESTAMP NOT NULL,
-    "endsAt" TIMESTAMP NOT NULL,
+    "startsAt" TIMESTAMP WITH TIME ZONE NOT NULL,
+    "endsAt" TIMESTAMP WITH TIME ZONE NOT NULL,
     "vacancy" INTEGER NOT NULL,
     "location" INTEGER,
 
@@ -42,3 +42,14 @@ ALTER TABLE "ActivitySubscription" ADD CONSTRAINT "ActivitySubscription_ticketId
 
 -- AddForeignKey
 ALTER TABLE "ActivitySubscription" ADD CONSTRAINT "ActivitySubscription_activityId_fkey" FOREIGN KEY ("activityId") REFERENCES "Activities"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Alterar Activities
+ALTER TABLE "Activities" ALTER COLUMN "date" TYPE TIMESTAMP WITH TIME ZONE;
+
+-- Alterar Activities
+ALTER TABLE "Activities" ALTER COLUMN "startsAt" TYPE TIMESTAMP WITH TIME ZONE;
+
+-- Alterar Activities
+ALTER TABLE "Activities" ALTER COLUMN "endsAt" TYPE TIMESTAMP WITH TIME ZONE;
+
+SET TIMEZONE TO 'America/Sao_Paulo';
