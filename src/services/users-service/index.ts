@@ -8,9 +8,13 @@ import { duplicatedEmailError } from "./errors";
 export async function createUser({ email, password }: CreateUserParams): Promise<User> {
   await canEnrollOrFail();
 
-  await validateUniqueEmailOrFail(email);
+  const duplicated = await validateUniqueEmailOrFail(email);
+  if(duplicated){
+    throw duplicatedEmailError();
+  }
+  const passwordText: string = password.toString() as string;
 
-  const hashedPassword = await bcrypt.hash(password, 12);
+  const hashedPassword = await bcrypt.hash(passwordText, 12);
   return userRepository.create({
     email,
     password: hashedPassword,
@@ -20,8 +24,9 @@ export async function createUser({ email, password }: CreateUserParams): Promise
 async function validateUniqueEmailOrFail(email: string) {
   const userWithSameEmail = await userRepository.findByEmail(email);
   if (userWithSameEmail) {
-    throw duplicatedEmailError();
+    return userWithSameEmail;
   }
+  return false;
 }
 
 async function canEnrollOrFail() {
@@ -35,6 +40,7 @@ export type CreateUserParams = Pick<User, "email" | "password">;
 
 const userService = {
   createUser,
+  validateUniqueEmailOrFail
 };
 
 export * from "./errors";
