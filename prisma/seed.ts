@@ -9,6 +9,8 @@ async function main() {
   await prisma.room.deleteMany({});
   await prisma.address.deleteMany({});
   await prisma.payment.deleteMany({});
+  await prisma.activitySubscription.deleteMany({})
+  await prisma.activities.deleteMany({})
   await prisma.ticket.deleteMany({});
   await prisma.ticketType.deleteMany({});
   await prisma.enrollment.deleteMany({});
@@ -98,12 +100,29 @@ async function main() {
   if (!ticketType) {
     ticketType = await prisma.ticketType.create({
       data: {
-        name: 'ingresso',
-        price: 13,
-        isRemote: false,
-        includesHotel: true,
+        name: "Online",
+        price: 100,
+        isRemote: true,
+        includesHotel: false
       },
     });
+    await prisma.ticketType.create({
+      data: {
+        name: 'Presencial',
+        price: 250,
+        isRemote: false,
+        includesHotel: false
+      },
+    })
+    await prisma.ticketType.create({
+      data: {
+        name: 'Presencial',
+        price: 600,
+        isRemote: false,
+        includesHotel: true
+      },
+    })
+
   }
 
   if (!ticket) {
