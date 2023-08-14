@@ -1,7 +1,7 @@
 import { prisma, redis } from "@/config";
 
 async function findHotels() {
-  const hotelsCache = await redis.get("hotels");
+  /*const hotelsCache = await redis.get("hotels");
   if (!hotelsCache || JSON.parse(hotelsCache).length === 0) {
     const hotels = await prisma.hotel.findMany({
       include: {
@@ -16,6 +16,16 @@ async function findHotels() {
     return hotels;
   }
   return JSON.parse(hotelsCache);
+  */
+  return await prisma.hotel.findMany({
+    include: {
+      Rooms: {
+        include: {
+          Booking: true,
+        }
+      }
+    }
+  });
 }
 
 async function findRoomsByHotelId(hotelId: number) {

@@ -5,8 +5,9 @@ const prisma = new PrismaClient();
 
 async function main() {
   await prisma.event.deleteMany({});
-  await prisma.hotel.deleteMany({});
+  await prisma.booking.deleteMany({});
   await prisma.room.deleteMany({});
+  await prisma.hotel.deleteMany({});
   await prisma.address.deleteMany({});
   await prisma.payment.deleteMany({});
   await prisma.activitySubscription.deleteMany({})
@@ -42,17 +43,32 @@ async function main() {
     hotel = await prisma.hotel.create({
       data: {
         name: 'Driven.t hotel',
-        image: 'https://files.driveneducation.com.br/images/logo-rounded.png',
+        image: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/316400116.jpg?k=087e20375aec04ea4671d3db275e5bf8cef73b17263a2fba5bea074640241456&o=&hp=1',
+        updatedAt: dayjs().toDate(),
+      },
+    });
+    await prisma.hotel.create({
+      data: {
+        name: 'Driven.t hotel 2',
+        image: 'https://quantocustaviajar.com/blog/wp-content/uploads/2021/05/peninsula.jpg',
         updatedAt: dayjs().toDate(),
       },
     });
   }
 
-  if (room) {
+  if (!room) {
     room = await prisma.room.create({
       data: {
         name: 'Driven.t room',
         capacity: 3,
+        hotelId: hotel.id,
+        updatedAt: dayjs().toDate(),
+      },
+    });
+    await prisma.room.create({
+      data: {
+        name: 'Driven.t room 2',
+        capacity: 2,
         hotelId: hotel.id,
         updatedAt: dayjs().toDate(),
       },
