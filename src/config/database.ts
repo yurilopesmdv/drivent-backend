@@ -11,7 +11,7 @@ export function connectDb(): void {
 export async function disconnectDB(): Promise<void> {
   await prisma?.$disconnect();
 }
-
+/*
 export async function connectRedis() {
   // redis = createClient({ url: "redis://redis:6379" });
   redis = createClient();
@@ -22,3 +22,4 @@ export async function connectRedis() {
 export async function disconnectRedis() {
   redis.disconnect();
 }
+*/
