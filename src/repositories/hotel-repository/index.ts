@@ -1,7 +1,31 @@
-import { prisma } from "@/config";
+import { prisma, redis } from "@/config";
 
 async function findHotels() {
-  return prisma.hotel.findMany();
+  /*const hotelsCache = await redis.get("hotels");
+  if (!hotelsCache || JSON.parse(hotelsCache).length === 0) {
+    const hotels = await prisma.hotel.findMany({
+      include: {
+        Rooms: {
+          include: {
+            Booking: true,
+          }
+        }
+      }
+    });
+    await redis.set("hotels", JSON.stringify(hotels));
+    return hotels;
+  }
+  return JSON.parse(hotelsCache);
+  */
+  return await prisma.hotel.findMany({
+    include: {
+      Rooms: {
+        include: {
+          Booking: true,
+        }
+      }
+    }
+  });
 }
 
 async function findRoomsByHotelId(hotelId: number) {
@@ -10,7 +34,11 @@ async function findRoomsByHotelId(hotelId: number) {
       id: hotelId,
     },
     include: {
-      Rooms: true,
+      Rooms: {
+        include: {
+          Booking: true,
+        }
+      }
     }
   });
 }

@@ -4,7 +4,7 @@ import { exclude } from "@/utils/prisma-utils";
 import { Event } from "@prisma/client";
 import dayjs from "dayjs";
 
-async function getFirstEvent(): Promise<GetFirstEventResult> {
+async function getFirstEvent() {
   const event = await eventRepository.findFirst();
   if (!event) throw notFoundError();
 

@@ -4,15 +4,15 @@
         "colId": "history",
         "containerId": "",
         "name": "http://localhost:4000/tickets/types",
-        "url": "http://localhost:4000/tickets",
+        "url": "http://localhost:4000/hotels",
         "method": "GET",
         "sortNum": 0,
         "created": "2023-08-02T16:50:19.516Z",
-        "modified": "2023-08-04T16:40:42.153Z",
+        "modified": "2023-08-11T22:41:38.882Z",
         "headers": [
             {
                 "name": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY5MDk5MDQ1OH0.7uCR7Q0r_y2KkpJT58ncTz0fY1tmK4qqQXeVsMhmChY"
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImlhdCI6MTY5MTc5MjQwNX0.ZkgCg-0qiqSoeWJ0a6YqIeTOyGfpxGpXNNqmebOSkS4"
             }
         ],
         "params": [],

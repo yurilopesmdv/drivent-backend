@@ -1,14 +1,17 @@
-import { PrismaClient } from "@prisma/client";
-import dayjs from "dayjs";
+import { PrismaClient } from '@prisma/client';
+import dayjs from 'dayjs';
 import bcrypt from 'bcrypt';
 const prisma = new PrismaClient();
 
 async function main() {
   await prisma.event.deleteMany({});
-  await prisma.hotel.deleteMany({});
+  await prisma.booking.deleteMany({});
   await prisma.room.deleteMany({});
+  await prisma.hotel.deleteMany({});
   await prisma.address.deleteMany({});
   await prisma.payment.deleteMany({});
+  await prisma.activitySubscription.deleteMany({})
+  await prisma.activities.deleteMany({})
   await prisma.ticket.deleteMany({});
   await prisma.ticketType.deleteMany({});
   await prisma.enrollment.deleteMany({});
@@ -27,11 +30,11 @@ async function main() {
   if (!event) {
     event = await prisma.event.create({
       data: {
-        title: "Driven.t",
-        logoImageUrl: "https://files.driveneducation.com.br/images/logo-rounded.png",
-        backgroundImageUrl: "linear-gradient(to right, #FA4098, #FFD77F)",
+        title: 'Driven.t',
+        logoImageUrl: 'https://files.driveneducation.com.br/images/logo-rounded.png',
+        backgroundImageUrl: 'linear-gradient(to right, #FA4098, #FFD77F)',
         startsAt: dayjs().toDate(),
-        endsAt: dayjs().add(21, "days").toDate(),
+        endsAt: dayjs().add(21, 'days').toDate(),
       },
     });
   }
@@ -39,31 +42,46 @@ async function main() {
   if (!hotel) {
     hotel = await prisma.hotel.create({
       data: {
-        name: "Driven.t hotel",
-        image: "https://files.driveneducation.com.br/images/logo-rounded.png",
-        updatedAt: dayjs().toDate()
+        name: 'Driven.t hotel',
+        image: 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/316400116.jpg?k=087e20375aec04ea4671d3db275e5bf8cef73b17263a2fba5bea074640241456&o=&hp=1',
+        updatedAt: dayjs().toDate(),
+      },
+    });
+    await prisma.hotel.create({
+      data: {
+        name: 'Driven.t hotel 2',
+        image: 'https://quantocustaviajar.com/blog/wp-content/uploads/2021/05/peninsula.jpg',
+        updatedAt: dayjs().toDate(),
       },
     });
   }
 
-  if (room) {
+  if (!room) {
     room = await prisma.room.create({
       data: {
-        name: "Driven.t room",
+        name: 'Driven.t room',
         capacity: 3,
         hotelId: hotel.id,
-        updatedAt: dayjs().toDate()
+        updatedAt: dayjs().toDate(),
+      },
+    });
+    await prisma.room.create({
+      data: {
+        name: 'Driven.t room 2',
+        capacity: 2,
+        hotelId: hotel.id,
+        updatedAt: dayjs().toDate(),
       },
     });
   }
 
   if (!user) {
-    const hashedPassword = await bcrypt.hash("123456", 12);
+    const hashedPassword = await bcrypt.hash('123456', 12);
     user = await prisma.user.create({
       data: {
-        email: "email@email.com",
+        email: 'email@email.com',
         password: hashedPassword,
-        updatedAt: dayjs().toDate()
+        updatedAt: dayjs().toDate(),
       },
     });
   }
@@ -71,11 +89,11 @@ async function main() {
   if (!enrollment) {
     enrollment = await prisma.enrollment.create({
       data: {
-        name: "joao",
-        cpf: "06459861198",
+        name: 'joao',
+        cpf: '06459861198',
         birthday: dayjs().toDate(),
-        phone: "61 9 81617008",
-        userId: user.id
+        phone: '61 9 81617008',
+        userId: user.id,
       },
     });
   }
@@ -83,14 +101,14 @@ async function main() {
   if (!address) {
     address = await prisma.address.create({
       data: {
-        cep: "71725053",
+        cep: '71725053',
         street: 'Avenida Brigadeiro Faria Lima',
-        city: 'São Paulo',
-        state:  'Itaim Bibi',
-        number: "10",
-        neighborhood:  'Itaim Bibi',
-        addressDetail:  'de 3252 ao fim - lado par',
-        enrollmentId: enrollment.id
+        city: 'SÃ£o Paulo',
+        state: 'Itaim Bibi',
+        number: '10',
+        neighborhood: 'Itaim Bibi',
+        addressDetail: 'de 3252 ao fim - lado par',
+        enrollmentId: enrollment.id,
       },
     });
   }
@@ -120,7 +138,7 @@ async function main() {
         includesHotel: true
       },
     })
-    
+
   }
 
   if (!ticket) {
@@ -128,7 +146,7 @@ async function main() {
       data: {
         ticketTypeId: ticketType.id,
         enrollmentId: enrollment.id,
-        status: "PAID"
+        status: 'PAID',
       },
     });
   }
@@ -138,11 +156,12 @@ async function main() {
       data: {
         ticketId: ticket.id,
         value: 13,
-        cardIssuer: "Visa",
-        cardLastDigits: "2323"
+        cardIssuer: 'Visa',
+        cardLastDigits: '2323',
       },
     });
   }
+
   /*
   if (!booking) {
     booking = await prisma.booking.create({
@@ -154,8 +173,8 @@ async function main() {
     });
   }
   */
-  console.log({ event, hotel, room, user, enrollment, address, ticketType, ticket, payment });
 
+  console.log({ event, hotel, room, user, enrollment, address, ticketType, ticket, payment });
 }
 
 main()
