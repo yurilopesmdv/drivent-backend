@@ -38,13 +38,13 @@ app
 
 export function init(): Promise<Express> {
   connectDb();
-  connectRedis();
+  //connectRedis();
   return Promise.resolve(app);
 }
 
 export async function close(): Promise<void> {
   await disconnectDB();
-  await disconnectRedis();
+  //await disconnectRedis();
 }
 
 export default app;
