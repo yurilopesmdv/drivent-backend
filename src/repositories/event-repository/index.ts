@@ -1,6 +1,7 @@
 import { prisma, redis } from "../../config";
 
 async function findFirst() {
+  return await prisma.event.findFirst();
   const eventCache = await redis.get("event");
   if (!eventCache || JSON.parse(eventCache).id === undefined) {
     const event = await prisma.event.findFirst();
