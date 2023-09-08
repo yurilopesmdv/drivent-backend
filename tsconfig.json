@@ -8,8 +8,6 @@
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "rootDirs": [
-      "src",
-      "tests"
     ],
     "baseUrl": "src",
     "paths": {

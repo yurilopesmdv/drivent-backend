@@ -1,9 +1,9 @@
-import { AddressEnrollment } from "@/protocols";
-import { getAddress } from "@/utils/cep-service";
-import { notFoundError } from "@/errors";
-import { CreateAddressParams } from "@/repositories/address-repository";
-import enrollmentRepository, { CreateEnrollmentParams } from "@/repositories/enrollment-repository";
-import { exclude } from "@/utils/prisma-utils";
+import { AddressEnrollment } from "../../protocols";
+import { getAddress } from "../../utils/cep-service";
+import { notFoundError } from "../../errors";
+import { CreateAddressParams } from "../../repositories/address-repository";
+import enrollmentRepository, { CreateEnrollmentParams } from "../../repositories/enrollment-repository";
+import { exclude } from "../../utils/prisma-utils";
 import { Address, Enrollment } from "@prisma/client";
 import enrAdressRepository from "../../repositories/enr-adress-t-repository/index";
 

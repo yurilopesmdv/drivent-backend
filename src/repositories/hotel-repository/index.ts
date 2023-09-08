@@ -1,4 +1,4 @@
-import { prisma, redis } from "@/config";
+import { prisma, redis } from "../../config";
 
 async function findHotels() {
   /*const hotelsCache = await redis.get("hotels");

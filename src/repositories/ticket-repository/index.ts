@@ -1,4 +1,4 @@
-import { prisma } from "@/config";
+import { prisma } from "../../config";
 import { Ticket, TicketStatus } from "@prisma/client";
 
 async function findTicketTypes() {

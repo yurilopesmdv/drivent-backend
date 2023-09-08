@@ -1,8 +1,8 @@
 import { Response } from 'express';
-import { AuthenticatedRequest } from '@/middlewares';
+import { AuthenticatedRequest } from '../middlewares';
 import httpStatus from 'http-status';
-import activitiesService from '@/services/activities-service';
-import ticketService from '@/services/tickets-service';
+import activitiesService from '../services/activities-service';
+import ticketService from '../services/tickets-service';
 
 export async function activitySubscription(req: AuthenticatedRequest, res: Response) {
   try {

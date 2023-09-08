@@ -1,5 +1,5 @@
-import { init } from '@/app';
-import { loadEnv } from '@/config';
+import { init } from './app';
+import { loadEnv } from './config';
 import { PrismaClient } from '@prisma/client';
 
 import {

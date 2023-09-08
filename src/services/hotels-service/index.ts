@@ -1,8 +1,8 @@
-import hotelRepository from "@/repositories/hotel-repository";
-import enrollmentRepository from "@/repositories/enrollment-repository";
-import ticketRepository from "@/repositories/ticket-repository";
-import { notFoundError } from "@/errors";
-import { cannotListHotelsError } from "@/errors/cannot-list-hotels-error";
+import hotelRepository from "../../repositories/hotel-repository";
+import enrollmentRepository from "../../repositories/enrollment-repository";
+import ticketRepository from "../../repositories/ticket-repository";
+import { notFoundError } from "../../errors";
+import { cannotListHotelsError } from "../../errors/cannot-list-hotels-error";
 
 async function listHotels(userId: number) {
   //Tem enrollment?

@@ -1,5 +1,5 @@
-import { prisma } from "@/config";
-import { GitHubParamsForAccessToken } from "@/services";
+import { prisma } from "../../config";
+import { GitHubParamsForAccessToken } from "../../services";
 import { Prisma } from "@prisma/client";
 import axios from "axios";
 

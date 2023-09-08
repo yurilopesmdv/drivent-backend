@@ -3,11 +3,11 @@ import 'express-async-errors';
 import express, { Express } from 'express';
 import cors from 'cors';
 
-import { loadEnv, connectDb, disconnectDB, connectRedis, disconnectRedis } from '@/config';
+import { loadEnv, connectDb, disconnectDB, connectRedis, disconnectRedis } from './config';
 
 loadEnv();
 
-import { handleApplicationErrors } from '@/middlewares';
+import { handleApplicationErrors } from './middlewares';
 import {
   usersRouter,
   authenticationRouter,
@@ -18,7 +18,7 @@ import {
   hotelsRouter,
   bookingRouter,
   activitiesRouter,
-} from '@/routers';
+} from './routers';
 
 const app = express();
 app

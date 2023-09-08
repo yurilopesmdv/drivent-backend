@@ -1,4 +1,4 @@
-import { prisma } from "@/config";
+import { prisma } from "../../config";
 import { Payment } from "@prisma/client";
 
 async function findPaymentByTicketId(ticketId: number) {

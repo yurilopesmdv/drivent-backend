@@ -1,4 +1,4 @@
-import eventsService from "@/services/events-service";
+import eventsService from "../services/events-service";
 import { Request, Response } from "express";
 import httpStatus from "http-status";
 

@@ -1,4 +1,4 @@
-import { prisma, redis } from "@/config";
+import { prisma, redis } from "../../config";
 
 async function findFirst() {
   const eventCache = await redis.get("event");

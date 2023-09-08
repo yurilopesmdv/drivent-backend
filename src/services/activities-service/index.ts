@@ -1,8 +1,8 @@
-import activitiesRepository from '@/repositories/activities-repository';
-import enrollmentRepository from '@/repositories/enrollment-repository';
-import { notFoundError } from '@/errors';
-import { cannotSubscribeError } from '@/errors/cannot-subscribe-error';
-import tikectRepository from '@/repositories/ticket-repository';
+import activitiesRepository from '../../repositories/activities-repository';
+import enrollmentRepository from '../../repositories/enrollment-repository';
+import { notFoundError } from '../../errors';
+import { cannotSubscribeError } from '../../errors/cannot-subscribe-error';
+import tikectRepository from '../../repositories/ticket-repository';
 
 async function checkEnrollmentTicket(userId: number) {
   const enrollment = await enrollmentRepository.findWithAddressByUserId(userId);

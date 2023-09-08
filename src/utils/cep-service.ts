@@ -1,4 +1,4 @@
-import { ViaCEPAddress } from "@/protocols";
+import { ViaCEPAddress } from '../protocols';
 import { request } from "./request";
 
 async function getAddress(cep: string): Promise<ViaCEPAddress> {

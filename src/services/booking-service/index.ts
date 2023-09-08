@@ -1,8 +1,8 @@
-import { cannotBookingError, notFoundError } from "@/errors";
-import roomRepository from "@/repositories/room-repository";
-import bookingRepository from "@/repositories/booking-repository";
-import enrollmentRepository from "@/repositories/enrollment-repository";
-import tikectRepository from "@/repositories/ticket-repository";
+import { cannotBookingError, notFoundError } from "../../errors";
+import roomRepository from "../../repositories/room-repository";
+import bookingRepository from "../../repositories/booking-repository";
+import enrollmentRepository from "../../repositories/enrollment-repository";
+import tikectRepository from "../../repositories/ticket-repository";
 
 async function checkEnrollmentTicket(userId: number) {
   const enrollment = await enrollmentRepository.findWithAddressByUserId(userId);

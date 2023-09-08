@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import { authenticateToken } from '@/middlewares';
+import { authenticateToken } from '../middlewares';
 import {
   getDays,
   userHasSubscripted,
   activitySubscription,
   getActivitiesByDay,
   unsubscribeActivity,
-} from '@/controllers/activities-controller';
+} from '../controllers/activities-controller';
 const activitiesRouter = Router();
 
 activitiesRouter

@@ -1,4 +1,4 @@
-import { prisma } from "@/config";
+import { prisma } from "../../config";
 import { Booking } from "@prisma/client";
 
 type CreateParams = Omit<Booking, "id" | "createdAt" | "updatedAt">;

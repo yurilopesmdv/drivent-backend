@@ -1,4 +1,4 @@
-import { CreateOrUpdateEnrollmentWithAddress } from "@/services/enrollments-service";
+import { CreateOrUpdateEnrollmentWithAddress } from "../services/enrollments-service";
 import { getStates, isValidCEP, isValidCPF, isValidMobilePhone } from "@brazilian-utils/brazilian-utils";
 import Joi from "joi";
 

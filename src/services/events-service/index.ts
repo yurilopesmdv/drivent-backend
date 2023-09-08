@@ -1,6 +1,6 @@
-import { notFoundError } from "@/errors";
-import eventRepository from "@/repositories/event-repository";
-import { exclude } from "@/utils/prisma-utils";
+import { notFoundError } from "../../errors";
+import eventRepository from "../../repositories/event-repository";
+import { exclude } from "../../utils/prisma-utils";
 import { Event } from "@prisma/client";
 import dayjs from "dayjs";
 
