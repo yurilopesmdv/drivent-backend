@@ -9,19 +9,19 @@ Driven.t is a web browser application with which you can manage every single asp
 ## Technologies Used
 
 - TypeScript
-  ![TypeScript](https://img.shields.io/badge/-TypeScript-blue?style=for-the-badge&logo=typescript)
+  ![](https://img.shields.io/badge/-TypeScript-blue?style=for-the-badge&logo=typescript)
 
 - Node.js
-  ![Node.js](https://img.shields.io/badge/-Node.js-green?style=for-the-badge&logo=node.js)
+  ![](https://img.shields.io/badge/-Node.js-green?style=for-the-badge&logo=node.js)
 
 - Prisma
-  ![Prisma](https://img.shields.io/badge/-Prisma-lightgrey?style=for-the-badge&logo=prisma)
+  ![](https://img.shields.io/badge/-Prisma-lightgrey?style=for-the-badge&logo=prisma)
 
 - PostgreSQL
-  ![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-blue?style=for-the-badge&logo=postgresql)
+  ![](https://img.shields.io/badge/-PostgreSQL-blue?style=for-the-badge&logo=postgresql)
 
 - Redis
-  ![Redis](https://img.shields.io/badge/-Redis-red?style=for-the-badge&logo=redis)
+  ![](https://img.shields.io/badge/-Redis-red?style=for-the-badge&logo=redis)
 
 
 
