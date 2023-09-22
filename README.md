@@ -28,8 +28,13 @@ npm run dev:migration:run
 ```bash
 npm run dev:seed
 ```
+7. Populate your database
 
-6. Run the back-end in a development environment:
+```bash
+npm run populate
+```
+
+8. Run the back-end in a development environment:
 
 ```bash
 npm run dev
